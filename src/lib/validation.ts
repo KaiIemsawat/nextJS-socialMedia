@@ -19,4 +19,4 @@ export const loginSchema = z.object({
   password: requiredString,
 });
 
-export type LoginSchema = z.infer<typeof loginSchema>;
+export type LoginValues = z.infer<typeof loginSchema>;
