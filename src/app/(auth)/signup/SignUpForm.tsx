@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useTransition } from "react";
 import { signUp } from "./actions";
 import { PasswordInput } from "@/components/PasswordInput";
+import LoadingButton from "@/components/LoadingButton";
 
 export default function SignUpForm() {
   const [error, setError] = useState<string>();
@@ -92,9 +93,9 @@ export default function SignUpForm() {
         />
 
         {/*  SUBMIT BUTTON */}
-        <Button type="submit" className="w-full">
+        <LoadingButton loading={isPending} type="submit" className="w-full">
           Create Account
-        </Button>
+        </LoadingButton>
       </form>
     </Form>
   );
