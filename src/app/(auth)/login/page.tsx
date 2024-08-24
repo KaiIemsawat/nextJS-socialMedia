@@ -18,7 +18,7 @@ export default function Page() {
           <div className="space-y-5">
             <LoginForm />
             <Link href="/signup" className="block text-center hover:underline">
-              Don&apos;t have an account? Sign ip
+              Don&apos;t have an account? Sign up
             </Link>
           </div>
         </div>
