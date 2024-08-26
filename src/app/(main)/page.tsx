@@ -1,20 +1,13 @@
 import PostEditor from "@/components/posts/editor/PostEditor";
 import Post from "@/components/posts/Post";
+import { postDataInclude } from "@/components/ui/type";
 import prisma from "@/lib/prisma";
 
 export default async function Home() {
   const posts = await prisma.post.findMany({
     orderBy: { createdAt: "desc" },
     // Select what to fetch
-    include: {
-      user: {
-        select: {
-          username: true,
-          displayName: true,
-          avatarUrl: true,
-        },
-      },
-    },
+    include: postDataInclude,
   });
   return (
     <main className="h-[200vh] w-full bg-red-50">
