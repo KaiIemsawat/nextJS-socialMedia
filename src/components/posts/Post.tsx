@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PostData } from "../ui/type";
+import { PostData } from "../../lib/type";
 import UserAvatar from "../UserAvatar";
 import { formatRelativeDate } from "@/lib/utils";
 
@@ -29,6 +29,7 @@ export default function Post({ post }: PostProps) {
           </Link>
         </div>
       </div>
+      <div className="whitespace-pre-line break-words">{post.content}</div>
     </article>
   );
 }
