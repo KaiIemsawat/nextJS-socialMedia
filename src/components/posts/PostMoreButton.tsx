@@ -1,9 +1,14 @@
 import { PostData } from "@/lib/type";
 import { useState } from "react";
 import DeletePostDialog from "./DeletePostDialog";
-import { DropdownMenu, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
-import { MoreHorizontalIcon } from "lucide-react";
+import { MoreHorizontalIcon, Trash2 } from "lucide-react";
 
 interface PostMoreButtonProps {
   post: PostData;
@@ -24,6 +29,14 @@ export default function PostMoreButton({
             <MoreHorizontalIcon className="size-5 text-muted-foreground" />
           </Button>
         </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem onClick={() => setShowDeleteDialog(true)}>
+            <span className="flex items-center gap-3 text-destructive">
+              <Trash2 className="size-4" />
+              Delete
+            </span>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
       </DropdownMenu>
       <DeletePostDialog
         post={post}
