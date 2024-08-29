@@ -1,8 +1,5 @@
 import PostEditor from "@/components/posts/editor/PostEditor";
-import Post from "@/components/posts/Post";
 import TrendsSidebar from "@/components/TrendsSidebar";
-import { postDataInclude } from "@/lib/type";
-import prisma from "@/lib/prisma";
 import ForYouFeed from "./ForYouFeed";
 
 export default function Home() {

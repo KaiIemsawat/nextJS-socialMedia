@@ -1,7 +1,6 @@
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
 import { FollowerInfo } from "@/lib/type";
-import { error } from "console";
 
 export async function GET(
   req: Request,

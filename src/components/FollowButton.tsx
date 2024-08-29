@@ -1,3 +1,5 @@
+"use client";
+
 import useFollowerInfo from "@/hooks/useFollowerInfo";
 import { FollowerInfo } from "@/lib/type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
