@@ -29,7 +29,7 @@ model User {
   following    Follow[]  @relation("Following")
   followers    Follow[]  @relation("Followers")
 
-  createAt DateTime @default(now())
+  createdAt DateTime @default(now())
 
   @@map("users")
 }
