@@ -64,7 +64,6 @@ async function WhoToFollow() {
               </div>
             </Link>
           </UserTooltip>
-
           <FollowButton
             userId={user.id}
             initialState={{
