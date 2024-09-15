@@ -1,6 +1,7 @@
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -18,8 +19,11 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import LoadingButton from "@/components/LoadingButton";
 
 interface EditProfileDialogProps {
   user: UserData;
@@ -43,7 +47,16 @@ export default function EditProfileDialog({
   const mutation = useUpdateProfileMutation();
 
   async function onSubmit(values: UpdateUserProfileValues) {
-    // will be implemented
+    mutation.mutate(
+      {
+        values,
+      },
+      {
+        onSuccess: () => {
+          onOpenChange(false);
+        },
+      },
+    );
   }
 
   return (
@@ -63,9 +76,32 @@ export default function EditProfileDialog({
                   <FormControl>
                     <Input placeholder="Your display name" {...field} />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="bio"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Bio</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Tell us a little bit about yourself"
+                      className="resize-none"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <DialogFooter>
+              <LoadingButton type="submit" loading={mutation.isPending}>
+                Save
+              </LoadingButton>
+            </DialogFooter>
           </form>
         </Form>
       </DialogContent>
