@@ -12,11 +12,23 @@ import { submitPost } from "./acton";
 import "./styles.css";
 import { useSubmitPostMutation } from "./mutations";
 import LoadingButton from "@/components/LoadingButton";
+import useMediaUpload from "./useMediaUpload";
+import { useRef } from "react";
+import { ImageIcon } from "lucide-react";
 
 export default function PostEditor() {
   const { user } = useSession();
 
   const mutation = useSubmitPostMutation();
+
+  const {
+    startUpload,
+    attachments,
+    isUploading,
+    uploadProgress,
+    removeAttachment,
+    reset: resetMediaUploads,
+  } = useMediaUpload();
 
   const editor = useEditor({
     extensions: [
@@ -36,11 +48,18 @@ export default function PostEditor() {
     }) || "";
 
   function onSubmit() {
-    mutation.mutate(input, {
-      onSuccess: () => {
-        editor?.commands.clearContent();
+    mutation.mutate(
+      {
+        content: input,
+        mediaIds: attachments.map((a) => a.mediaId).filter(Boolean) as string[],
       },
-    });
+      {
+        onSuccess: () => {
+          editor?.commands.clearContent();
+          resetMediaUploads();
+        },
+      },
+    );
   }
 
   return (
@@ -52,7 +71,11 @@ export default function PostEditor() {
           className="max-h-[20rem] w-full overflow-y-auto rounded-2xl bg-background px-5 py-3"
         />
       </div>
-      <div className="flex justify-end">
+      <div className="flex items-center justify-end gap-3">
+        <AddAttachmentsButton
+          onFilesSelected={startUpload}
+          disabled={isUploading || attachments.length >= 5}
+        />
         <LoadingButton
           onClick={onSubmit}
           loading={mutation.isPending}
@@ -63,5 +86,45 @@ export default function PostEditor() {
         </LoadingButton>
       </div>
     </div>
+  );
+}
+
+interface AddAttachmentsButtonProps {
+  onFilesSelected: (files: File[]) => void;
+  disabled: boolean;
+}
+
+function AddAttachmentsButton({
+  onFilesSelected,
+  disabled,
+}: AddAttachmentsButtonProps) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  return (
+    <>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="text-primary hover:text-primary"
+        disabled={disabled}
+        onClick={() => fileInputRef.current?.click()}
+      >
+        <ImageIcon size={20} />
+      </Button>
+      <input
+        type="file"
+        accept="image/*, video/*"
+        multiple
+        ref={fileInputRef}
+        className="sr-only hidden"
+        onChange={(e) => {
+          const files = Array.from(e.target.files || []);
+          if (files.length) {
+            onFilesSelected(files);
+            e.target.value = "";
+          }
+        }}
+      />
+    </>
   );
 }
