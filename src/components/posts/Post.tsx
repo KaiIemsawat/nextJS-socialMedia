@@ -40,6 +40,7 @@ export default function Post({ post }: PostProps) {
             <Link
               href={`/posts/${post.id}`}
               className="block text-sm text-muted-foreground hover:underline"
+              suppressHydrationWarning // to avoid time different issues. happens when time still in seconds
             >
               {formatRelativeDate(post.createdAt)}
             </Link>
