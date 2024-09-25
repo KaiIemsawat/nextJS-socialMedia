@@ -76,3 +76,28 @@ export async function POST(
     return Response.json({ error: "Internal server error" });
   }
 }
+
+export async function DELETE(
+  req: Request,
+  { params: { postId } }: { params: { postId: string } },
+) {
+  try {
+    const { user: loggedInUser } = await validateRequest();
+
+    if (!loggedInUser) {
+      return Response.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    await prisma.like.deleteMany({
+      where: {
+        userId: loggedInUser.id,
+        postId,
+      },
+    });
+
+    return new Response();
+  } catch (error) {
+    console.error(error);
+    return Response.json({ error: "Internal server error" });
+  }
+}
