@@ -47,7 +47,7 @@ export default function UserButton({ className }: UserButtonProps) {
         <DropdownMenuSeparator />
 
         {/* PROFILE */}
-        <Link href={`/user.username`}>
+        <Link href={`/users/${user.username}`}>
           <DropdownMenuItem>
             <UserIcon className="mr-2 size-4" />
             Profile
