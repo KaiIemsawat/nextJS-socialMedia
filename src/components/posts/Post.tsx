@@ -1,21 +1,21 @@
 "use client";
 
-import Link from "next/link";
-import { cn, formatRelativeDate } from "@/lib/utils";
-
-import { PostData } from "../../lib/type";
-import UserAvatar from "../UserAvatar";
 import { useSession } from "@/app/(main)/SessionProvider";
-import PostMoreButton from "./PostMoreButton";
-import Linkify from "../Linkify";
-import UserTooltip from "../UserTooltip";
+import { PostData } from "@/lib/type";
+import { cn, formatRelativeDate } from "@/lib/utils";
 import { Media } from "@prisma/client";
-import Image from "next/image";
-import LikeButton from "./LikeButton";
-import BookmarkButton from "./BookmarkButton";
-import { useState } from "react";
 import { MessageSquare } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 import Comments from "../comments/Comments";
+
+import UserTooltip from "../UserTooltip";
+import BookmarkButton from "./BookmarkButton";
+import LikeButton from "./LikeButton";
+import PostMoreButton from "./PostMoreButton";
+import UserAvatar from "../UserAvatar";
+import Linkify from "../Linkify";
 
 interface PostProps {
   post: PostData;

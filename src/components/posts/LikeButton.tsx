@@ -1,14 +1,14 @@
-import { FollowerInfo, LikeInfo } from "@/lib/type";
-import { useToast } from "../ui/use-toast";
+import kyInstance from "@/lib/ky";
+import { LikeInfo } from "@/lib/type";
+import { cn } from "@/lib/utils";
 import {
   QueryKey,
   useMutation,
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import kyInstance from "@/lib/ky";
 import { Heart } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { useToast } from "../ui/use-toast";
 
 interface LikeButtonProps {
   postId: string;

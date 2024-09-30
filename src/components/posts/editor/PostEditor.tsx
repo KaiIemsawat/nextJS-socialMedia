@@ -1,23 +1,22 @@
 "use client";
 
-import { EditorContent, useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Placeholder from "@tiptap/extension-placeholder";
-import UserAvatar from "@/components/UserAvatar";
+import { useSession } from "@/app/(main)/SessionProvider";
+
 import { Button } from "@/components/ui/button";
 
-import { useSession } from "@/app/(main)/SessionProvider";
-import { submitPost } from "./acton";
-
-import "./styles.css";
-import { useSubmitPostMutation } from "./mutations";
-import LoadingButton from "@/components/LoadingButton";
-import useMediaUpload, { Attachment } from "./useMediaUpload";
-import { ClipboardEvent, useRef } from "react";
-import { ImageIcon, Loader2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
+import Placeholder from "@tiptap/extension-placeholder";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 import { useDropzone } from "@uploadthing/react";
+import { ImageIcon, Loader2, X } from "lucide-react";
+import Image from "next/image";
+import { ClipboardEvent, useRef } from "react";
+import { useSubmitPostMutation } from "./mutations";
+import "./styles.css";
+import useMediaUpload, { Attachment } from "./useMediaUpload";
+import UserAvatar from "@/components/UserAvatar";
+import LoadingButton from "@/components/LoadingButton";
 
 export default function PostEditor() {
   const { user } = useSession();

@@ -1,11 +1,11 @@
 "use client";
 
 import useFollowerInfo from "@/hooks/useFollowerInfo";
+import kyInstance from "@/lib/ky";
 import { FollowerInfo } from "@/lib/type";
 import { QueryKey, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useToast } from "./ui/use-toast";
 import { Button } from "./ui/button";
-import kyInstance from "@/lib/ky";
+import { useToast } from "./ui/use-toast";
 
 interface FollowButtonProps {
   userId: string;
@@ -43,7 +43,6 @@ export default function FollowButton({
 
       return { previousState };
     },
-
     onError(error, variables, context) {
       queryClient.setQueryData(queryKey, context?.previousState);
       console.error(error);

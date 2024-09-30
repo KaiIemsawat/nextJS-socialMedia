@@ -1,5 +1,4 @@
 import prisma from "@/lib/prisma";
-import { error } from "console";
 import { UTApi } from "uploadthing/server";
 
 export async function GET(req: Request) {

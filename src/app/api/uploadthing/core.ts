@@ -1,6 +1,5 @@
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
-import { EthernetPort } from "lucide-react";
 import { createUploadthing, FileRouter } from "uploadthing/next";
 import { UploadThingError, UTApi } from "uploadthing/server";
 
@@ -18,7 +17,6 @@ export const fileRouter = {
       return { user };
     })
     .onUploadComplete(async ({ metadata, file }) => {
-      // Delete old avatar in database
       const oldAvatarUrl = metadata.user.avatarUrl;
 
       if (oldAvatarUrl) {
@@ -45,7 +43,7 @@ export const fileRouter = {
     }),
   attachment: f({
     image: { maxFileSize: "4MB", maxFileCount: 5 },
-    video: { maxFileSize: "64MB", maxFileCount: 2 },
+    video: { maxFileSize: "64MB", maxFileCount: 5 },
   })
     .middleware(async () => {
       const { user } = await validateRequest();

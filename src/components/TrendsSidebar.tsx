@@ -1,16 +1,15 @@
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
+import { getUserDataSelect } from "@/lib/type";
+import { formatNumber } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
+import { unstable_cache } from "next/cache";
 import Link from "next/link";
 import { Suspense } from "react";
-import { unstable_cache } from "next/cache";
-
-import UserAvatar from "./UserAvatar";
-import { Button } from "./ui/button";
-import { formatNumber } from "@/lib/utils";
 import FollowButton from "./FollowButton";
-import { getUserDataSelect } from "@/lib/type";
+
 import UserTooltip from "./UserTooltip";
+import UserAvatar from "./UserAvatar";
 
 export default function TrendsSidebar() {
   return (
@@ -31,7 +30,7 @@ async function WhoToFollow() {
   const usersToFollow = await prisma.user.findMany({
     where: {
       NOT: {
-        id: user?.id, // not include the current user
+        id: user.id,
       },
       followers: {
         none: {
@@ -110,7 +109,7 @@ async function TrendingTopics() {
         const title = hashtag.split("#")[1];
 
         return (
-          <Link key={title} href={`/hashtah/${title}`} className="block">
+          <Link key={title} href={`/hashtag/${title}`} className="block">
             <p
               className="line-clamp-1 break-all font-semibold hover:underline"
               title={hashtag}

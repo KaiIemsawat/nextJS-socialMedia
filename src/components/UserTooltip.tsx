@@ -2,18 +2,19 @@
 
 import { useSession } from "@/app/(main)/SessionProvider";
 import { FollowerInfo, UserData } from "@/lib/type";
+import Link from "next/link";
 import { PropsWithChildren } from "react";
+import FollowButton from "./FollowButton";
+import FollowerCount from "./FollowerCount";
+
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
-import Link from "next/link";
 import UserAvatar from "./UserAvatar";
-import FollowButton from "./FollowButton";
 import Linkify from "./Linkify";
-import FollowerCount from "./FollowerCount";
 
 interface UserTooltipProps extends PropsWithChildren {
   user: UserData;
@@ -48,7 +49,7 @@ export default function UserTooltip({ children, user }: UserTooltipProps) {
                 <div className="text-lg font-semibold hover:underline">
                   {user.displayName}
                 </div>
-                <div className="text-muted-foreground">@${user.username}</div>
+                <div className="text-muted-foreground">@{user.username}</div>
               </Link>
             </div>
             {user.bio && (

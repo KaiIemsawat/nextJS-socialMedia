@@ -12,7 +12,7 @@ interface UserLinkWithTooltipProps extends PropsWithChildren {
   username: string;
 }
 
-export default function UserLinkWithTootip({
+export default function UserLinkWithTooltip({
   children,
   username,
 }: UserLinkWithTooltipProps) {
@@ -24,7 +24,6 @@ export default function UserLinkWithTootip({
       if (error instanceof HTTPError && error.response.status === 404) {
         return false;
       }
-
       return failureCount < 3;
     },
     staleTime: Infinity,
@@ -40,6 +39,7 @@ export default function UserLinkWithTootip({
       </Link>
     );
   }
+
   return (
     <UserTooltip user={data}>
       <Link

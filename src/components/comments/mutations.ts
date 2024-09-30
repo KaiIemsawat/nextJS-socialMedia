@@ -1,3 +1,4 @@
+import { CommentsPage } from "@/lib/type";
 import {
   InfiniteData,
   QueryKey,
@@ -6,7 +7,6 @@ import {
 } from "@tanstack/react-query";
 import { useToast } from "../ui/use-toast";
 import { deleteComment, submitComment } from "./actions";
-import { CommentsPage } from "@/lib/type";
 
 export function useSubmitCommentMutation(postId: string) {
   const { toast } = useToast();

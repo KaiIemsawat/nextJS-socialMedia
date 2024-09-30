@@ -1,14 +1,14 @@
+import kyInstance from "@/lib/ky";
 import { BookmarkInfo } from "@/lib/type";
-import { useToast } from "../ui/use-toast";
+import { cn } from "@/lib/utils";
 import {
   QueryKey,
   useMutation,
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import kyInstance from "@/lib/ky";
-import { BookmarkIcon, Heart } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Bookmark } from "lucide-react";
+import { useToast } from "../ui/use-toast";
 
 interface BookmarkButtonProps {
   postId: string;
@@ -42,6 +42,7 @@ export default function BookmarkButton({
       toast({
         description: `Post ${data.isBookmarkedByUser ? "un" : ""}bookmarked`,
       });
+
       await queryClient.cancelQueries({ queryKey });
 
       const previousState = queryClient.getQueryData<BookmarkInfo>(queryKey);
@@ -52,7 +53,6 @@ export default function BookmarkButton({
 
       return { previousState };
     },
-
     onError(error, variables, context) {
       queryClient.setQueryData(queryKey, context?.previousState);
       console.error(error);
@@ -65,10 +65,10 @@ export default function BookmarkButton({
 
   return (
     <button onClick={() => mutate()} className="flex items-center gap-2">
-      <BookmarkIcon
+      <Bookmark
         className={cn(
           "size-5",
-          data.isBookmarkedByUser && "fill-[#049f23] text-[#049f23]",
+          data.isBookmarkedByUser && "fill-primary text-primary",
         )}
       />
     </button>
