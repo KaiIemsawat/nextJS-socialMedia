@@ -76,7 +76,6 @@ export default function PostEditor() {
     const files = Array.from(e.clipboardData.items)
       .filter((item) => item.kind === "file")
       .map((item) => item.getAsFile()) as File[];
-
     startUpload(files);
   }
 
@@ -96,14 +95,12 @@ export default function PostEditor() {
           <input {...getInputProps()} />
         </div>
       </div>
-
       {!!attachments.length && (
         <AttachmentPreviews
           attachments={attachments}
           removeAttachment={removeAttachment}
         />
       )}
-
       <div className="flex items-center justify-end gap-3">
         {isUploading && (
           <>
@@ -111,7 +108,6 @@ export default function PostEditor() {
             <Loader2 className="size-5 animate-spin text-primary" />
           </>
         )}
-
         <AddAttachmentsButton
           onFilesSelected={startUpload}
           disabled={isUploading || attachments.length >= 5}

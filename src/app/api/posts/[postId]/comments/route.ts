@@ -13,6 +13,7 @@ export async function GET(
     const pageSize = 5;
 
     const { user } = await validateRequest();
+
     if (!user) {
       return Response.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -22,7 +23,6 @@ export async function GET(
       include: getCommentDataInclude(user.id),
       orderBy: { createdAt: "asc" },
       take: -pageSize - 1,
-
       cursor: cursor ? { id: cursor } : undefined,
     });
 

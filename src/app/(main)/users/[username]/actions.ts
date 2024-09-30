@@ -8,8 +8,8 @@ import {
   UpdateUserProfileValues,
 } from "@/lib/validation";
 
-export async function updateUserProfile(value: UpdateUserProfileValues) {
-  const validatedValues = updateUserProfileSchema.parse(value);
+export async function updateUserProfile(values: UpdateUserProfileValues) {
+  const validatedValues = updateUserProfileSchema.parse(values);
 
   const { user } = await validateRequest();
 

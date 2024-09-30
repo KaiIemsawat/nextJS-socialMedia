@@ -21,5 +21,6 @@ export async function deletePost(id: string) {
     where: { id },
     include: getPostDataInclude(user.id),
   });
+
   return deletedPost;
 }

@@ -13,14 +13,14 @@ export const fileRouter = {
     .middleware(async () => {
       const { user } = await validateRequest();
 
-      if (!user) {
-        throw new UploadThingError("Unauthorized");
-      }
+      if (!user) throw new UploadThingError("Unauthorized");
+
       return { user };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // Delete old avatar in database
       const oldAvatarUrl = metadata.user.avatarUrl;
+
       if (oldAvatarUrl) {
         const key = oldAvatarUrl.split(
           `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`,

@@ -48,7 +48,6 @@ export default function LikeButton({ postId, initialState }: LikeButtonProps) {
 
       return { previousState };
     },
-
     onError(error, variables, context) {
       queryClient.setQueryData(queryKey, context?.previousState);
       console.error(error);

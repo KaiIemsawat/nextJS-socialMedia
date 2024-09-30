@@ -1,6 +1,12 @@
 "use client";
 
+import { logout } from "@/app/(auth)/actions";
 import { useSession } from "@/app/(main)/SessionProvider";
+import { cn } from "@/lib/utils";
+import { useQueryClient } from "@tanstack/react-query";
+import { Check, LogOutIcon, Monitor, Moon, Sun, UserIcon } from "lucide-react";
+import { useTheme } from "next-themes";
+import Link from "next/link";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,12 +20,6 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import UserAvatar from "./UserAvatar";
-import Link from "next/link";
-import { Check, LogOutIcon, Monitor, Moon, Sun, UserIcon } from "lucide-react";
-import { logout } from "@/app/(auth)/actions";
-import { cn } from "@/lib/utils";
-import { useTheme } from "next-themes";
-import { useQueryClient } from "@tanstack/react-query";
 
 interface UserButtonProps {
   className?: string;
@@ -35,18 +35,13 @@ export default function UserButton({ className }: UserButtonProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        {/* AVATAR */}
         <button className={cn("flex-none rounded-full", className)}>
           <UserAvatar avatarUrl={user.avatarUrl} size={40} />
         </button>
       </DropdownMenuTrigger>
-
       <DropdownMenuContent>
-        {/* TOP - LOGGED IN AS */}
         <DropdownMenuLabel>Logged in as @{user.username}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-
-        {/* PROFILE */}
         <Link href={`/users/${user.username}`}>
           <DropdownMenuItem>
             <UserIcon className="mr-2 size-4" />
@@ -59,34 +54,26 @@ export default function UserButton({ className }: UserButtonProps) {
             Theme
           </DropdownMenuSubTrigger>
           <DropdownMenuPortal>
-            {/* themes */}
             <DropdownMenuSubContent>
               <DropdownMenuItem onClick={() => setTheme("system")}>
-                <Monitor
-                  className={`mr-2 size-4 ${theme === "system" && "text-primary"}`}
-                />
+                <Monitor className="mr-2 size-4" />
                 System default
+                {theme === "system" && <Check className="ms-2 size-4" />}
               </DropdownMenuItem>
-
               <DropdownMenuItem onClick={() => setTheme("light")}>
-                <Sun
-                  className={`mr-2 size-4 ${theme === "light" && "text-primary"}`}
-                />
+                <Sun className="mr-2 size-4" />
                 Light
+                {theme === "light" && <Check className="ms-2 size-4" />}
               </DropdownMenuItem>
-
               <DropdownMenuItem onClick={() => setTheme("dark")}>
-                <Moon
-                  className={`mr-2 size-4 ${theme === "dark" && "text-primary"}`}
-                />
+                <Moon className="mr-2 size-4" />
                 Dark
+                {theme === "dark" && <Check className="ms-2 size-4" />}
               </DropdownMenuItem>
             </DropdownMenuSubContent>
           </DropdownMenuPortal>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
-
-        {/* LOGOUT */}
         <DropdownMenuItem
           onClick={() => {
             queryClient.clear();

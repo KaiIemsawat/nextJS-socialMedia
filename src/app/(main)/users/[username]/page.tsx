@@ -49,13 +49,13 @@ export async function generateMetadata({
   };
 }
 
-export default async function page({ params: { username } }: PageProps) {
+export default async function Page({ params: { username } }: PageProps) {
   const { user: loggedInUser } = await validateRequest();
 
   if (!loggedInUser) {
     return (
       <p className="text-center text-destructive">
-        You're not authorized to view this page.
+        You&apos;re not authorized to view this page.
       </p>
     );
   }

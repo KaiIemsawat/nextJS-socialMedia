@@ -13,6 +13,7 @@ export async function GET(
     const pageSize = 10;
 
     const { user } = await validateRequest();
+
     if (!user) {
       return Response.json({ error: "Unauthorized" }, { status: 401 });
     }

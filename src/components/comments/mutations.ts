@@ -6,14 +6,14 @@ import {
 } from "@tanstack/react-query";
 import { useToast } from "../ui/use-toast";
 import { deleteComment, submitComment } from "./actions";
-import { CommentData, CommentsPage } from "@/lib/type";
+import { CommentsPage } from "@/lib/type";
 
 export function useSubmitCommentMutation(postId: string) {
   const { toast } = useToast();
 
   const queryClient = useQueryClient();
 
-  const mutataion = useMutation({
+  const mutation = useMutation({
     mutationFn: submitComment,
     onSuccess: async (newComment) => {
       const queryKey: QueryKey = ["comments", postId];
@@ -55,12 +55,12 @@ export function useSubmitCommentMutation(postId: string) {
       console.error(error);
       toast({
         variant: "destructive",
-        description: "Failed to comment. Please try again.",
+        description: "Failed to submit comment. Please try again.",
       });
     },
   });
 
-  return mutataion;
+  return mutation;
 }
 
 export function useDeleteCommentMutation() {
@@ -94,13 +94,12 @@ export function useDeleteCommentMutation() {
         description: "Comment deleted",
       });
     },
-
     onError(error) {
-      console.error(error),
-        toast({
-          variant: "destructive",
-          description: "Failed to delete comment. Please try again.",
-        });
+      console.error(error);
+      toast({
+        variant: "destructive",
+        description: "Failed to delete comment. Please try again.",
+      });
     },
   });
 

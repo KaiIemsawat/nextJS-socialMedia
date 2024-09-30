@@ -1,14 +1,13 @@
 import { CommentData } from "@/lib/type";
+import { MoreHorizontal, Trash2 } from "lucide-react";
 import { useState } from "react";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
-import { MoreHorizontalIcon, Trash2 } from "lucide-react";
-import DeletePostDialog from "../posts/DeletePostDialog";
 import DeleteCommentDialog from "./DeleteCommentDialog";
 
 interface CommentMoreButtonProps {
@@ -27,7 +26,7 @@ export default function CommentMoreButton({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button size="icon" variant="ghost" className={className}>
-            <MoreHorizontalIcon className="size-5 text-muted-foreground" />
+            <MoreHorizontal className="size-5 text-muted-foreground" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>

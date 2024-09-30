@@ -14,7 +14,7 @@ export default function Comment({ comment }: CommentProps) {
   const { user } = useSession();
 
   return (
-    <div className="group/comment flex gap-4 py-3">
+    <div className="group/comment flex gap-3 py-3">
       <span className="hidden sm:inline">
         <UserTooltip user={comment.user}>
           <Link href={`/users/${comment.user.username}`}>
@@ -22,13 +22,12 @@ export default function Comment({ comment }: CommentProps) {
           </Link>
         </UserTooltip>
       </span>
-
       <div>
         <div className="flex items-center gap-1 text-sm">
           <UserTooltip user={comment.user}>
             <Link
               href={`/users/${comment.user.username}`}
-              className="font-mediuml hover:underline"
+              className="font-medium hover:underline"
             >
               {comment.user.displayName}
             </Link>
@@ -37,7 +36,6 @@ export default function Comment({ comment }: CommentProps) {
             {formatRelativeDate(comment.createdAt)}
           </span>
         </div>
-
         <div>{comment.content}</div>
       </div>
       {comment.user.id === user.id && (

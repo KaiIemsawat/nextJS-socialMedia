@@ -36,7 +36,9 @@ export function getPostDataInclude(loggedInUserId: string) {
     },
     attachments: true,
     likes: {
-      where: { userId: loggedInUserId },
+      where: {
+        userId: loggedInUserId,
+      },
       select: {
         userId: true,
       },
@@ -103,7 +105,7 @@ export type NotificationData = Prisma.NotificationGetPayload<{
   include: typeof notificationsInclude;
 }>;
 
-export interface NotificationPage {
+export interface NotificationsPage {
   notifications: NotificationData[];
   nextCursor: string | null;
 }
@@ -120,4 +122,8 @@ export interface LikeInfo {
 
 export interface BookmarkInfo {
   isBookmarkedByUser: boolean;
+}
+
+export interface NotificationCountInfo {
+  unreadCount: number;
 }

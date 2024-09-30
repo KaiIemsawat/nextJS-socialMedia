@@ -30,6 +30,7 @@ export function useSubmitPostMutation() {
           );
         },
       } satisfies QueryFilters;
+
       await queryClient.cancelQueries(queryFilter);
 
       queryClient.setQueriesData<InfiniteData<PostsPage, string | null>>(

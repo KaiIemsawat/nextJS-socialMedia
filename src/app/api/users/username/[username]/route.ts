@@ -7,9 +7,9 @@ export async function GET(
   { params: { username } }: { params: { username: string } },
 ) {
   try {
-    const { user: loggeedInUser } = await validateRequest();
+    const { user: loggedInUser } = await validateRequest();
 
-    if (!loggeedInUser) {
+    if (!loggedInUser) {
       return Response.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -20,7 +20,7 @@ export async function GET(
           mode: "insensitive",
         },
       },
-      select: getUserDataSelect(loggeedInUser.id),
+      select: getUserDataSelect(loggedInUser.id),
     });
 
     if (!user) {

@@ -35,7 +35,6 @@ export default function Comments({ post }: CommentsProps) {
   return (
     <div className="space-y-3">
       <CommentInput post={post} />
-
       {hasNextPage && (
         <Button
           variant="link"
@@ -46,17 +45,15 @@ export default function Comments({ post }: CommentsProps) {
           Load previous comments
         </Button>
       )}
-
       {status === "pending" && <Loader2 className="mx-auto animate-spin" />}
       {status === "success" && !comments.length && (
-        <p className="text-center text-muted-foreground">No comment yet</p>
+        <p className="text-center text-muted-foreground">No comments yet.</p>
       )}
       {status === "error" && (
         <p className="text-center text-destructive">
-          An error occurred while loading comments
+          An error occurred while loading comments.
         </p>
       )}
-
       <div className="divide-y">
         {comments.map((comment) => (
           <Comment key={comment.id} comment={comment} />

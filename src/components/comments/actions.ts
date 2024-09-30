@@ -4,7 +4,6 @@ import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
 import { getCommentDataInclude, PostData } from "@/lib/type";
 import { createCommentSchema } from "@/lib/validation";
-import { fromTheme } from "tailwind-merge";
 
 export async function submitComment({
   post,
@@ -15,7 +14,7 @@ export async function submitComment({
 }) {
   const { user } = await validateRequest();
 
-  if (!user) throw Error("Unauthorized");
+  if (!user) throw new Error("Unauthorized");
 
   const { content: contentValidated } = createCommentSchema.parse({ content });
 
@@ -48,7 +47,7 @@ export async function submitComment({
 export async function deleteComment(id: string) {
   const { user } = await validateRequest();
 
-  if (!user) throw Error("Unauthorized");
+  if (!user) throw new Error("Unauthorized");
 
   const comment = await prisma.comment.findUnique({
     where: { id },

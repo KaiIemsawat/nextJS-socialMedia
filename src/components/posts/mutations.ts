@@ -40,20 +40,19 @@ export function useDeletePostMutation() {
       );
 
       toast({
-        description: "Post deleted!!",
+        description: "Post deleted",
       });
 
       if (pathname === `/posts/${deletedPost.id}`) {
         router.push(`/users/${deletedPost.user.username}`);
       }
     },
-
     onError(error) {
-      console.error(error),
-        toast({
-          variant: "destructive",
-          description: "Failed to delete post. Please try again.",
-        });
+      console.error(error);
+      toast({
+        variant: "destructive",
+        description: "Failed to delete post. Please try again.",
+      });
     },
   });
 

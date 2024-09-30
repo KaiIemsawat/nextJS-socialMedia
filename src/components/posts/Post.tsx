@@ -29,7 +29,7 @@ export default function Post({ post }: PostProps) {
   return (
     <article className="group/post space-y-3 rounded-2xl bg-card p-5 shadow-sm">
       <div className="flex justify-between gap-3">
-        <div className="flx flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3">
           <UserTooltip user={post.user}>
             <Link href={`/users/${post.user.username}`}>
               <UserAvatar avatarUrl={post.user.avatarUrl} />
@@ -47,7 +47,7 @@ export default function Post({ post }: PostProps) {
             <Link
               href={`/posts/${post.id}`}
               className="block text-sm text-muted-foreground hover:underline"
-              suppressHydrationWarning // to avoid time different issues. happens when time still in seconds
+              suppressHydrationWarning
             >
               {formatRelativeDate(post.createdAt)}
             </Link>
@@ -63,12 +63,10 @@ export default function Post({ post }: PostProps) {
       <Linkify>
         <div className="whitespace-pre-line break-words">{post.content}</div>
       </Linkify>
-
       {!!post.attachments.length && (
         <MediaPreviews attachments={post.attachments} />
       )}
       <hr className="text-muted-foreground" />
-
       <div className="flex justify-between gap-5">
         <div className="flex items-center gap-5">
           <LikeButton
@@ -128,18 +126,18 @@ function MediaPreview({ media }: MediaPreviewProps) {
         alt="Attachment"
         width={500}
         height={500}
-        className="mx-auto size-fit max-h-[300rem] rounded-2xl"
+        className="mx-auto size-fit max-h-[30rem] rounded-2xl"
       />
     );
   }
 
   if (media.type === "VIDEO") {
     return (
-      <div className="">
+      <div>
         <video
           src={media.url}
           controls
-          className="mx-auto size-fit max-h-[300rem] rounded-2xl"
+          className="mx-auto size-fit max-h-[30rem] rounded-2xl"
         />
       </div>
     );
@@ -158,7 +156,8 @@ function CommentButton({ post, onClick }: CommentButtonProps) {
     <button onClick={onClick} className="flex items-center gap-2">
       <MessageSquare className="size-5" />
       <span className="text-sm font-medium tabular-nums">
-        {post._count.comments} <span className="hidden sm:inline">comment</span>
+        {post._count.comments}{" "}
+        <span className="hidden sm:inline">comments</span>
       </span>
     </button>
   );

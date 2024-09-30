@@ -1,6 +1,6 @@
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
-import { NotificationPage, notificationsInclude } from "@/lib/type";
+import { notificationsInclude, NotificationsPage } from "@/lib/type";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -10,6 +10,7 @@ export async function GET(req: NextRequest) {
     const pageSize = 10;
 
     const { user } = await validateRequest();
+
     if (!user) {
       return Response.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -27,7 +28,7 @@ export async function GET(req: NextRequest) {
     const nextCursor =
       notifications.length > pageSize ? notifications[pageSize].id : null;
 
-    const data: NotificationPage = {
+    const data: NotificationsPage = {
       notifications: notifications.slice(0, pageSize),
       nextCursor,
     };

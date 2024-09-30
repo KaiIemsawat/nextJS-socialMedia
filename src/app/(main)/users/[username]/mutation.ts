@@ -46,6 +46,7 @@ export function useUpdateProfileMutation() {
         queryFilter,
         (oldData) => {
           if (!oldData) return;
+
           return {
             pageParams: oldData.pageParams,
             pages: oldData.pages.map((page) => ({
@@ -66,6 +67,7 @@ export function useUpdateProfileMutation() {
           };
         },
       );
+
       router.refresh();
 
       toast({
@@ -76,7 +78,7 @@ export function useUpdateProfileMutation() {
       console.error(error);
       toast({
         variant: "destructive",
-        description: "Failed to update profile. Please try again",
+        description: "Failed to update profile. Please try again.",
       });
     },
   });
