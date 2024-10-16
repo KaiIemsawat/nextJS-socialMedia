@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
-import { useSession } from "../SessionProvider";
-import { StreamChat } from "stream-chat";
 import kyInstance from "@/lib/ky";
-import { error } from "console";
+import { useEffect, useState } from "react";
+import { StreamChat } from "stream-chat";
+import { useSession } from "../SessionProvider";
 
 export default function useInitializeChatClient() {
   const { user } = useSession();
