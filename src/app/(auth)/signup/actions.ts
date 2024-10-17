@@ -9,6 +9,7 @@ import prisma from "@/lib/prisma";
 import { signUpSchema, SignupValues } from "@/lib/validation";
 import { generateIdFromEntropySize } from "lucia";
 import { lucia } from "@/auth";
+import streamServerClient from "@/lib/stream";
 
 export async function signUp(
   credentials: SignupValues,
@@ -54,15 +55,23 @@ export async function signUp(
       };
     }
 
-    // If username and email are both unused, create a new account
-    await prisma.user.create({
-      data: {
+    await prisma.$transaction(async (tx) => {
+      // If username and email are both unused, create a new account
+      await tx.user.create({
+        data: {
+          id: userId,
+          username,
+          displayName: username,
+          email,
+          passwordHash,
+        },
+      });
+
+      await streamServerClient.upsertUser({
         id: userId,
         username,
-        displayName: username,
-        email,
-        passwordHash,
-      },
+        name: username,
+      });
     });
 
     // Create session
